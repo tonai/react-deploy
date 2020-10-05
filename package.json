@@ -37,6 +37,7 @@
     "prettier": "2.1.2",
     "react-app-polyfill": "1.0.6",
     "react-is": "16.13.1",
+    "source-map-explorer": "2.5.0",
     "stylelint": "13.7.2",
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-standard": "20.0.0",
@@ -55,7 +56,8 @@
     "cypress:open": "cypress open",
     "prettier": "prettier --write .",
     "eslint": "eslint --max-warnings=0 --fix './**/*.{js,jsx,ts,tsx}'",
-    "stylelint": "stylelint \"./**/*.{css,scss,sass}\" --fix"
+    "stylelint": "stylelint \"./**/*.{css,scss,sass}\" --fix",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [

@@ -1,5 +1,7 @@
+import api from '../apiService/apiService';
+
 export default {
   getCategories() {
-    return fetch('/categories').then((data) => data.json());
+    return api('/categories').then((data) => data.json());
   }
 };

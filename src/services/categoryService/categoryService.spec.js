@@ -1,18 +1,16 @@
-import fetchMock from 'jest-fetch-mock';
+import api from '../apiService/apiService';
 
 import categoryService from './categoryService';
 
-fetchMock.enableMocks();
+jest.mock('../apiService/apiService');
 
 describe('categoryService service', () => {
-  beforeEach(() => {
-    fetch.resetMocks();
+  afterEach(() => {
+    api.mockClear();
   });
 
   it('getCategories', async () => {
-    fetch.mockResponseOnce(JSON.stringify([{ id: 42 }]));
-    const categories = await categoryService.getCategories();
-    expect(categories.length).toEqual(1);
-    expect(fetch).toHaveBeenCalledWith('/categories');
+    await categoryService.getCategories();
+    expect(api).toHaveBeenCalledWith('/categories');
   });
 });

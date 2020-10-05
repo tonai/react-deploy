@@ -1,6 +1,8 @@
+import api from '../apiService/apiService';
+
 export default {
   addArticle(article) {
-    return fetch('/articles', {
+    return api('/articles', {
       body: JSON.stringify(article),
       headers: { 'Content-Type': 'application/json' },
       method: 'POST'
@@ -8,21 +10,21 @@ export default {
   },
 
   getArticle(id) {
-    return fetch(`/articles/${id}`).then((data) => data.json());
+    return api(`/articles/${id}`).then((data) => data.json());
   },
 
   getArticles() {
-    return fetch('/articles').then((data) => data.json());
+    return api('/articles').then((data) => data.json());
   },
 
   removeArticle(id) {
-    return fetch(`/articles/${id}`, {
+    return api(`/articles/${id}`, {
       method: 'DELETE'
     }).then((data) => data.json());
   },
 
   updateArticle(article) {
-    return fetch(`/articles/${article.id}`, {
+    return api(`/articles/${article.id}`, {
       body: JSON.stringify(article),
       headers: { 'Content-Type': 'application/json' },
       method: 'PUT'
