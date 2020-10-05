@@ -2,7 +2,7 @@
 
 ## Generate bundle
 
-Launch command:
+Run command:
 
 ```bash
 npm run build
@@ -14,7 +14,7 @@ npm run build
 npm i -g serve
 ```
 
-Launch command:
+Run command:
 
 ```bash
 serve -s build
@@ -75,8 +75,49 @@ Update file `package.json` with:
 },
 ```
 
-And launch command:
+Run command:
 
 ```bash
 npm run analyze
 ```
+
+# Deploy
+
+## GH pages
+
+```
+npm i -D gh-pages
+```
+
+Update file `package.json` with:
+
+```json
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
+},
+```
+
+Run command:
+
+```bash
+npm run deploy
+```
+
+Check the settings of your project in Github and search for `GitHub Pages` to get the URL your app (exemple: https://tonai.github.io/react-deploy/).
+
+Check your site, but files should not load correclty.
+
+Update file `package.json` with:
+
+```json
+"homepage": "https://tonai.github.io/react-deploy/"
+```
+
+Run command again:
+
+```bash
+npm run deploy
+```
+
+And check again.

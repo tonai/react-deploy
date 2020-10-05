@@ -31,6 +31,7 @@
     "enzyme-adapter-react-16": "1.15.3",
     "eslint-config-prettier": "6.12.0",
     "eslint-plugin-cypress": "2.11.1",
+    "gh-pages": "3.1.0",
     "husky": "4.3.0",
     "jest-fetch-mock": "3.0.3",
     "lint-staged": "10.4.0",
@@ -57,7 +58,9 @@
     "prettier": "prettier --write .",
     "eslint": "eslint --max-warnings=0 --fix './**/*.{js,jsx,ts,tsx}'",
     "stylelint": "stylelint \"./**/*.{css,scss,sass}\" --fix",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -101,5 +104,6 @@
       "git add"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "homepage": "https://tonai.github.io/react-deploy/"
 }
