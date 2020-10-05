@@ -1,14 +1,24 @@
-export const baseUrl = (() => {
-  const url = process.env.REACT_APP_API_URL;
-  if (url.lastIndexOf('/') === url.length - 1) {
-    return url.slice(0, -1);
-  }
-  return url;
-})();
+import { API } from 'aws-amplify';
 
-export default function api(url, options) {
-  if (url.indexOf('/') === 0) {
-    url = url.slice(1);
+const apiName = process.env.REACT_APP_API_NAME;
+
+export default function api(url, options = {}) {
+  if (url.indexOf('/') !== 0) {
+    url = '/' + url;
   }
-  return fetch(`${baseUrl}/${url}`, options);
+
+  const { method, ...init } = options;
+  switch (method) {
+    case 'DELETE':
+      return API.del(apiName, url, init);
+
+    case 'POST':
+      return API.post(apiName, url, init);
+
+    case 'PUT':
+      return API.put(apiName, url, init);
+
+    default:
+      return API.get(apiName, url, init);
+  }
 }

@@ -1,5 +1,1 @@
-export default jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve()
-  })
-);
+export default jest.fn(() => Promise.resolve());

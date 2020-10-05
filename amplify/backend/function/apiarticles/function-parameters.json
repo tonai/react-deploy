@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "storage": {
+      "dynamoarticles": ["create", "read", "update", "delete"]
+    }
+  },
+  "lambdaLayers": []
+}

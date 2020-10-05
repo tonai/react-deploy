@@ -6,21 +6,21 @@ export default {
       body: JSON.stringify(article),
       headers: { 'Content-Type': 'application/json' },
       method: 'POST'
-    }).then((data) => data.json());
+    });
   },
 
   getArticle(id) {
-    return api(`/articles/${id}`).then((data) => data.json());
+    return api(`/articles/${id}`);
   },
 
   getArticles() {
-    return api('/articles').then((data) => data.json());
+    return api('/articles');
   },
 
   removeArticle(id) {
     return api(`/articles/${id}`, {
       method: 'DELETE'
-    }).then((data) => data.json());
+    });
   },
 
   updateArticle(article) {
@@ -28,6 +28,6 @@ export default {
       body: JSON.stringify(article),
       headers: { 'Content-Type': 'application/json' },
       method: 'PUT'
-    }).then((data) => data.json());
+    });
   }
 };

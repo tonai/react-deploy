@@ -82,7 +82,7 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged",
-      "post-checkout": "../scripts/post-checkout.sh $HUSKY_GIT_PARAMS",
+      "post-checkout": "./scripts/post-checkout.sh $HUSKY_GIT_PARAMS",
       "post-merge": "npm ci",
       "post-rebase": "npm i"
     }
@@ -107,5 +107,5 @@
     ]
   },
   "proxy": "http://localhost:3001",
-  "homepage": "https://tonai.github.io/react-deploy/"
+  "homepage": "http://react-deploy-dev.s3-website-eu-west-1.amazonaws.com/"
 }

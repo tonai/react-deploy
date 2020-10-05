@@ -1,0 +1,48 @@
+{
+  "paths": [
+    {
+      "name": "/articles",
+      "lambdaFunction": "apiarticles",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/articles"
+    },
+    {
+      "name": "/categories",
+      "lambdaFunction": "apicategories",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/categories"
+    }
+  ],
+  "resourceName": "apireactdeploy",
+  "apiName": "apireactdeploy",
+  "functionArns": [
+    {
+      "lambdaFunction": "apiarticles"
+    },
+    {
+      "lambdaFunction": "apicategories"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-reactdeploy-dev-142949-authRole",
+    "unAuthRoleName": "amplify-reactdeploy-dev-142949-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "apiarticles",
+      "attributes": ["Name", "Arn"]
+    },
+    {
+      "category": "function",
+      "resourceName": "apicategories",
+      "attributes": ["Name", "Arn"]
+    }
+  ]
+}

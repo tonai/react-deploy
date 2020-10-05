@@ -169,26 +169,6 @@ Steps :
 - use AWS profile: `y`
 - Profile: `react-deploy`
 
-Install frontend dependencies:
-
-```bash
-npm i aws-amplify @aws-amplify/ui-react
-```
-
-Create file `src/amplify.js`:
-
-```js
-import Amplify from 'aws-amplify';
-import awsExports from './aws-exports';
-Amplify.configure(awsExports);
-```
-
-Update file `src/index.js` with :
-
-```js
-import './amplify';
-```
-
 ### Create API
 
 Run command:
@@ -203,13 +183,13 @@ Steps:
 - Resource name: `apireactdeploy`
 - Path: `/articles`
 - Lambda source: `Create a new Lambda function`
-- Resource name: `articles`
+- Resource name: `apiarticles`
 - Lambda name: `articles`
 - Runtime: `NodeJS`
 - Template: `CRUD function for DynamoDB`
 - DynamoDB source option: `Create a new DynamoDB table`
 - DynamoDB:
-  - Resource name: `apireactdeploy`
+  - Resource name: `dynamoarticles`
   - Table name: `articles`
   - Columns:
     - Column: `id`
@@ -241,13 +221,13 @@ Steps:
 - Add another path: `y`
 - Path: `/categories`
 - Lambda source: `Create a new Lambda function`
-- Resource name: `categories`
+- Resource name: `apicategories`
 - Lambda name: `categories`
 - Runtime: `NodeJS`
 - Template: `CRUD function for DynamoDB`
 - DynamoDB source option: `Create a new DynamoDB table`
 - DynamoDB:
-  - Resource name: `apireactdeploy`
+  - Resource name: `dynamocategories`
   - Table name: `categories`
   - Columns:
     - Column: `id`
@@ -262,8 +242,172 @@ Steps:
   - Lambda trigger: `n`
 - Create another resources: `y`
 - Category: `storage`
+- Resource: `dynamocategories`
 - Select operations: `read`
 - Recurring schedule: `n`
 - Lambda layers: `n`
 - Edit now: `n`
 - Restrict API access: `n`
+- Add another path: `n`
+
+### Deploy API
+
+Run command:
+
+```bash
+amplify push
+```
+
+It will upload files and create a backend endpoint (exemple: `https://x15ez5s0bl.execute-api.eu-west-1.amazonaws.com/dev`)
+
+Service will be created, you can check the status with:
+
+```bash
+amplify console
+```
+
+### Add categories in database
+
+Steps:
+
+- Connect to AWS console
+- Search for `DynamoDB`
+- Click `Tables` in the left pane
+- Select table `categories-dev`
+- In the right pane click `Éléments`
+- Click `Créer un élément`
+  - Create element `{ "id": 1, "title": "News" }`
+  - Create element `{ "id": 2, "title": "Blog post" }`
+- Select table `articles-dev`
+- In the right pane click `Éléments`
+- Click `Créer un élément`
+  - Create element `{ "id": 1, "title": "Article 1", "category": 1, "published": true, "content": "Lorem ipsum" }`
+  - Create element `{ "id": 2, "title": "Article 2", "category": 2, "published": true, "content": "Lorem ipsum" }`
+  - Create element `{ "id": 3, "title": "Article 3", "category": 1, "published": false, "content": "Lorem ipsum" }`
+
+### Update lambda functions
+
+In file `amplify/backend/function/apiarticles/src/app.js`:
+
+- line 93 change `res.json(data.Items);` into `res.json(data.Items[0]);`
+- add method:
+
+```js
+app.get(path, function (req, res) {
+  let queryParams = {
+    TableName: tableName
+  };
+
+  dynamodb.scan(queryParams, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({ error: 'Could not load items: ' + err });
+    } else {
+      res.json(data.Items);
+    }
+  });
+});
+```
+
+Same for file `amplify/backend/function/apicategories/src/app.js`.
+
+Deploy again with:
+
+```bash
+amplify push
+```
+
+Methods `POST`, `PUT` and `DELETE` need rework.
+
+### Update frontend
+
+Install frontend dependencies:
+
+```bash
+npm i aws-amplify @aws-amplify/ui-react
+```
+
+Create file `src/amplify.js`:
+
+```js
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+```
+
+Update file `src/index.js` with :
+
+```js
+import './amplify';
+```
+
+Update file `src/services/apiService/apiService.js` with:
+
+```js
+import { API } from 'aws-amplify';
+
+const apiName = process.env.REACT_APP_API_NAME;
+
+export default function api(url, options = {}) {
+  if (url.indexOf('/') !== 0) {
+    url = '/' + url;
+  }
+
+  const { method, ...init } = options;
+  switch (method) {
+    case 'DELETE':
+      return API.delete(apiName, url, init);
+
+    case 'POST':
+      return API.post(apiName, url, init);
+
+    case 'PUT':
+      return API.put(apiName, url, init);
+
+    default:
+      return API.get(apiName, url, init);
+  }
+}
+```
+
+Update all `.env*` files with:
+
+```
+REACT_APP_API_NAME = 'apireactdeploy'
+```
+
+### Deploy Frontend
+
+Run command:
+
+```bash
+amplify add hosting
+```
+
+Steps:
+
+- Plugin: `Amazon CloudFront and S3`
+- Environment setup: `DEV`
+- Bucket name: `react-deploy`
+- Index: `index.html`
+- Error: `index.html`
+
+```bash
+amplify publish
+```
+
+It will upload files and create a frontend endpoint (exemple: `http://react-deploy-dev.s3-website-eu-west-1.amazonaws.com/`)
+
+Update file `package.json` with:
+
+```json
+"homepage": "http://react-deploy-dev.s3-website-eu-west-1.amazonaws.com/"
+```
+
+Run command again:
+
+```bash
+amplify publish
+```
+
+And check again.
