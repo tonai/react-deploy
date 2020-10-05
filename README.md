@@ -121,3 +121,149 @@ npm run deploy
 ```
 
 And check again.
+
+## AWS Amplify
+
+### Initialization
+
+https://docs.amplify.aws/start/getting-started/installation/q/integration/react
+
+```bash
+npm i -g @aws-amplify/cli
+```
+
+Run command:
+
+```bash
+amplify configure
+```
+
+Steps :
+
+- Select region: `eu-west-1`
+- User name: `amplify-react-deploy`
+- Create user on web interface (next/next/next)
+- Enter access key
+- Enter secret key
+- Profile name: `react-deploy`
+
+### Setup backend
+
+Run command:
+
+```bash
+amplify init
+```
+
+Steps :
+
+- Project name: `reactdeploy`
+- Environment: `dev`
+- Default editor: `Visual Studio Code`
+- App type: `javascript`
+- Javascript framework: `react`
+- Source path: `src`
+- Distribution path: `build`
+- Build command: `npm run-script build`
+- Start command: `npm run-script start`
+- use AWS profile: `y`
+- Profile: `react-deploy`
+
+Install frontend dependencies:
+
+```bash
+npm i aws-amplify @aws-amplify/ui-react
+```
+
+Create file `src/amplify.js`:
+
+```js
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+```
+
+Update file `src/index.js` with :
+
+```js
+import './amplify';
+```
+
+### Create API
+
+Run command:
+
+```bash
+amplify add api
+```
+
+Steps:
+
+- Service: `REST`
+- Resource name: `apireactdeploy`
+- Path: `/articles`
+- Lambda source: `Create a new Lambda function`
+- Resource name: `articles`
+- Lambda name: `articles`
+- Runtime: `NodeJS`
+- Template: `CRUD function for DynamoDB`
+- DynamoDB source option: `Create a new DynamoDB table`
+- DynamoDB:
+  - Resource name: `apireactdeploy`
+  - Table name: `articles`
+  - Columns:
+    - Column: `id`
+    - Type: `number`
+    - Add another column: `y`
+    - Column: `title`
+    - Type: `string`
+    - Add another column: `y`
+    - Column: `content`
+    - Type: `string`
+    - Add another column: `y`
+    - Column: `category`
+    - Type: `number`
+    - Add another column: `y`
+    - Column: `published`
+    - Type: `boolean`
+    - Add another column: `n`
+  - Partition key: `id`
+  - Sort key: `n`
+  - Global secondary indexed: `n`
+  - Lambda trigger: `n`
+- Create another resources: `y`
+- Category: `storage`
+- Select operations: `create`, `read`, `update`, `delete`
+- Recurring schedule: `n`
+- Lambda layers: `n`
+- Edit now: `n`
+- Restrict API access: `n`
+- Add another path: `y`
+- Path: `/categories`
+- Lambda source: `Create a new Lambda function`
+- Resource name: `categories`
+- Lambda name: `categories`
+- Runtime: `NodeJS`
+- Template: `CRUD function for DynamoDB`
+- DynamoDB source option: `Create a new DynamoDB table`
+- DynamoDB:
+  - Resource name: `apireactdeploy`
+  - Table name: `categories`
+  - Columns:
+    - Column: `id`
+    - Type: `number`
+    - Add another column: `y`
+    - Column: `title`
+    - Type: `string`
+    - Add another column: `n`
+  - Partition key: `id`
+  - Sort key: `n`
+  - Global secondary indexed: `n`
+  - Lambda trigger: `n`
+- Create another resources: `y`
+- Category: `storage`
+- Select operations: `read`
+- Recurring schedule: `n`
+- Lambda layers: `n`
+- Edit now: `n`
+- Restrict API access: `n`
