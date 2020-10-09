@@ -5,7 +5,6 @@
 
 # testing
 /coverage
-__image_snapshots__
 /cypress/videos
 /cypress/screenshots
 
@@ -32,7 +31,6 @@ amplify/backend/awscloudformation
 build/
 dist/
 node_modules/
-aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json
 amplify-build-config.json
