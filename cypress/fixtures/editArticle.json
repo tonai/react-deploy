@@ -1,0 +1,5 @@
+{
+  "success": "put call succeed!",
+  "url": "/articles/42",
+  "data": {}
+}

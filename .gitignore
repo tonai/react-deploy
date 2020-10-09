@@ -7,6 +7,7 @@
 /coverage
 __image_snapshots__
 /cypress/videos
+/cypress/screenshots
 
 # production
 /build

@@ -50,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "cross-env CI=1 npm run jest:test && npm run cypress:test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
@@ -62,7 +62,8 @@
     "stylelint": "stylelint \"./**/*.{css,scss,sass}\" --fix",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "jest:test": "react-scripts test --env=jsdom"
   },
   "eslintConfig": {
     "extends": [
@@ -90,20 +91,15 @@
   "lint-staged": {
     "./**/*.{js,jsx,ts,tsx}": [
       "eslint --max-warnings=0 --fix --no-ignore",
-      "git add",
       "prettier --write",
-      "git add",
       "cross-env CI=test react-scripts test --bail --findRelatedTests"
     ],
     "./**/*.{css,scss,sass}": [
       "stylelint --fix",
-      "git add",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "./**/*.{json,md,html}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "proxy": "http://localhost:3001",
