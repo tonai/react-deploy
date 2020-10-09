@@ -1,0 +1,398 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Article Default 1`] = `
+<div
+  className="Article"
+  onClick={[Function]}
+>
+  <div
+    className="Article__cell"
+  >
+    Article 1
+  </div>
+  <div
+    className="Article__cell"
+  >
+    News
+  </div>
+  <div
+    className="Article__cell"
+  >
+    Published
+  </div>
+  <div
+    className="Article__cell"
+  >
+    <a
+      className="Article__link"
+      href="/article/1"
+      onClick={[Function]}
+    >
+      edit
+    </a>
+  </div>
+  <div
+    className="Article__cell"
+  >
+    <button
+      className="Article__link"
+      onClick={[Function]}
+    >
+      remove
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots ArticleForm Default 1`] = `
+<form
+  className="ArticleForm"
+  onSubmit={[Function]}
+>
+  <div
+    className="ArticleForm__table"
+  >
+    <div
+      className="ArticleForm__row"
+    >
+      <div
+        className="ArticleForm__cell"
+      >
+        <label
+          htmlFor="title"
+        >
+          Title :
+        </label>
+      </div>
+      <div
+        className="ArticleForm__cell"
+      >
+        <input
+          id="title"
+          name="title"
+          onChange={[Function]}
+          type="text"
+          value="Article 1"
+        />
+      </div>
+    </div>
+    <div
+      className="ArticleForm__row"
+    >
+      <div
+        className="ArticleForm__cell"
+      >
+        <label
+          htmlFor="title"
+        >
+          Category :
+        </label>
+      </div>
+      <div
+        className="ArticleForm__cell"
+      >
+        <select
+          id="category"
+          name="category"
+          onChange={[Function]}
+          value={1}
+        >
+          <option
+            value=""
+          />
+          <option
+            value={1}
+          >
+            News
+          </option>
+          <option
+            value={2}
+          >
+            Blog
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="ArticleForm__row"
+    >
+      <div
+        className="ArticleForm__cell"
+      >
+        <label
+          htmlFor="title"
+        >
+          Content :
+        </label>
+      </div>
+      <div
+        className="ArticleForm__cell"
+      >
+        <textarea
+          id="content"
+          name="content"
+          onChange={[Function]}
+          value="Lorem ipsum dolor sit amet."
+        />
+      </div>
+    </div>
+    <div
+      className="ArticleForm__row"
+    >
+      <div
+        className="ArticleForm__cell"
+      >
+        <label
+          htmlFor="title"
+        >
+          Published :
+        </label>
+      </div>
+      <div
+        className="ArticleForm__cell"
+      >
+        <input
+          checked={true}
+          id="published"
+          name="published"
+          onChange={[Function]}
+          type="checkbox"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="ArticleForm__buttons"
+  >
+    <input
+      className="ArticleForm__button"
+      type="submit"
+    />
+  </div>
+</form>
+`;
+
+exports[`Storyshots Container Default 1`] = `
+<div
+  className="Container"
+>
+  Lorem ipsum dolor sit amet.
+</div>
+`;
+
+exports[`Storyshots Filters Default 1`] = `
+<div
+  className="Filters"
+>
+  <div
+    className="Filters__cell"
+  >
+    <input
+      name="title"
+      onChange={[Function]}
+      type="text"
+      value="Article 1"
+    />
+  </div>
+  <div
+    className="Filters__cell"
+  >
+    <select
+      name="category"
+      onChange={[Function]}
+      value="1"
+    >
+      <option
+        value=""
+      />
+      <option
+        value={1}
+      >
+        News
+      </option>
+      <option
+        value={2}
+      >
+        Blog
+      </option>
+    </select>
+  </div>
+  <div
+    className="Filters__cell"
+  >
+    <label
+      className="Filters__label"
+    >
+      <input
+        checked={false}
+        name="published"
+        onChange={[Function]}
+        type="radio"
+        value=""
+      />
+      All
+    </label>
+    <label
+      className="Filters__label"
+    >
+      <input
+        checked={true}
+        name="published"
+        onChange={[Function]}
+        type="radio"
+        value="published"
+      />
+      Published
+    </label>
+    <label
+      className="Filters__label"
+    >
+      <input
+        checked={false}
+        name="published"
+        onChange={[Function]}
+        type="radio"
+        value="draft"
+      />
+      Draft
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Header Default 1`] = `
+<div
+  className="Header"
+>
+  <ul
+    className="Header__list"
+  >
+    <li
+      className="Header__item"
+    >
+      <a
+        className="Header__link"
+        href="/"
+        onClick={[Function]}
+      >
+        <img
+          alt="Logo"
+          className="Header__image"
+          src="logo.svg"
+        />
+        <span>
+          Home
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots List Default 1`] = `
+<div
+  className="List"
+>
+  <div
+    className="Article"
+    onClick={[Function]}
+  >
+    <div
+      className="Article__cell"
+    >
+      Article 1
+    </div>
+    <div
+      className="Article__cell"
+    >
+      News
+    </div>
+    <div
+      className="Article__cell"
+    >
+      Published
+    </div>
+    <div
+      className="Article__cell"
+    >
+      <a
+        className="Article__link"
+        href="/article/1"
+        onClick={[Function]}
+      >
+        edit
+      </a>
+    </div>
+    <div
+      className="Article__cell"
+    >
+      <button
+        className="Article__link"
+        onClick={[Function]}
+      >
+        remove
+      </button>
+    </div>
+  </div>
+  <div
+    className="Article"
+    onClick={[Function]}
+  >
+    <div
+      className="Article__cell"
+    >
+      Article 2
+    </div>
+    <div
+      className="Article__cell"
+    >
+      Blog
+    </div>
+    <div
+      className="Article__cell"
+    >
+      Draft
+    </div>
+    <div
+      className="Article__cell"
+    >
+      <a
+        className="Article__link"
+        href="/article/2"
+        onClick={[Function]}
+      >
+        edit
+      </a>
+    </div>
+    <div
+      className="Article__cell"
+    >
+      <button
+        className="Article__link"
+        onClick={[Function]}
+      >
+        remove
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Title Default 1`] = `
+<div
+  className="Title"
+>
+  <h1
+    className="Title__title"
+  >
+    Title
+  </h1>
+  <a
+    className="Title__button"
+    href="/"
+    onClick={[Function]}
+  >
+    Back
+  </a>
+</div>
+`;

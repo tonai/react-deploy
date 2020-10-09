@@ -6,7 +6,6 @@
 # testing
 /coverage
 __image_snapshots__
-__snapshots__
 /cypress/videos
 
 # production
