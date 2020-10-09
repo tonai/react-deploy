@@ -11,7 +11,7 @@ describe('UI', () => {
     cy.visit('/');
     cy.document().toMatchImageSnapshot({
       imageConfig: {
-        threshold: 1,
+        threshold: 0.001,
         thresholdType: 'percent'
       }
     });
