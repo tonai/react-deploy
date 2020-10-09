@@ -658,6 +658,7 @@ workflows:
     jobs:
       - node/test
       - cypress/run:
+          record: true
           start: 'npm start'
           wait-on: 'http://localhost:3000'
 ```
@@ -678,6 +679,35 @@ Snapshots must be commited along your code so check the `.gitignore` file ad rem
 Also remove `aws-exports.js` from `.gitignore` file to be able to launch development server on CI.
 
 Then push your code.
+
+### Cypress dashboard
+
+Run command:
+
+```bash
+npm run cypress:open
+```
+
+Steps:
+
+- Click on tabs `Runs`
+- Click `Setup Project to Record`
+- Click `Setup Project`
+
+Run command:
+
+```bash
+npx cypress run --record --key *****
+```
+
+Steps:
+
+- Go to Circle CI project pipelines
+- Click `Project Settings`
+- Click `Environment Variables`
+- Click `Add Environment Variable`
+  - Name: `CYPRESS_RECORD_KEY`
+  - Value: `*****`
 
 ## AWS Amplify
 
