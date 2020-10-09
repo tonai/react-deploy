@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useRef } from 'react';
+import React, { memo, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Categories from '../../contexts/Categories';
@@ -11,12 +11,6 @@ export function Filters(props) {
   const { category, published, title } = filters;
   const categories = useContext(Categories);
   const inputRef = useRef();
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
 
   return (
     <div className="Filters">

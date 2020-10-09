@@ -409,62 +409,7 @@ amplify publish
 
 And check again.
 
-# Continuous Integration
-
-## Circle CI
-
-### Configuration
-
-Steps
-
-- Connect to https://app.circleci.com/ with your Github account
-- Choose repo and click `Set Up Project`
-- Click `Add Config`
-  - if it does not work, choose `Manual Setup`
-  - Create file `.circleci/config.yml` with:
-  ```yml
-  version: 2.1
-  orbs:
-    node: circleci/node@3.0.0
-  workflows:
-    node-tests:
-      jobs:
-        - node/test
-  ```
-  - Commit and push to Gihub
-  - Back to Circle CI Click `Start Building`
-- Click `Proceed to New UX`
-
-Snapshots must be commited along your code so check the `.gitignore` file ad remove `__snapshots__` if it is present.
-
-Anytime you push to Github, Circle CI will run all your tests.  
-You will receive an email if tests failed.  
-You cans see the status of your tests in Circle CI Pipelines page : https://app.circleci.com/pipelines/github/tonai/react-deploy
-
-![Circle CI pipelines](./README/circleci.png)
-
-### Badge
-
-https://circleci.com/docs/2.0/status-badges/
-
-You can add in your README file a badge indicating the status of your last pipeline.
-
-Update file `README.md` the with :
-
-```markdown
-[![<ORG_NAME>](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg)](LINK)
-```
-
-### E2E and UI tests
-
-Update file `package.json` with:
-
-```json
-"scripts": {
-  "test": "cross-env CI=1 npm run jest:test && npm run cypress:test",
-  "jest:test": "react-scripts test --env=jsdom"
-}
-```
+### Fix E2E and UI tests
 
 Update mocks files with the following [files](./cypress/fixtures).
 
@@ -638,6 +583,98 @@ describe('UI', () => {
 });
 ```
 
+For better UI stability remove the automatic input focus in file `src/components/Filters/Filters.jsx`.
+
 Test locally with `npm run test`.
 
 Then push and check Circle CI.
+
+# Continuous Integration
+
+## Circle CI
+
+### Configuration
+
+Steps
+
+- Connect to https://app.circleci.com/ with your Github account
+- Choose repo and click `Set Up Project`
+- Click `Add Config`
+  - if it does not work, choose `Manual Setup`
+  - Create file `.circleci/config.yml` with:
+  ```yml
+  version: 2.1
+  orbs:
+    node: circleci/node@3.0.0
+  workflows:
+    node-tests:
+      jobs:
+        - node/test
+  ```
+  - Commit and push to Gihub
+  - Back to Circle CI Click `Start Building`
+- Click `Proceed to New UX`
+
+Snapshots must be commited along your code so check the `.gitignore` file ad remove `__snapshots__` if it is present.
+
+Anytime you push to Github, Circle CI will run all your tests.  
+You will receive an email if tests failed.  
+You cans see the status of your tests in Circle CI Pipelines page : https://app.circleci.com/pipelines/github/tonai/react-deploy
+
+![Circle CI pipelines](./README/circleci.png)
+
+### Badge
+
+https://circleci.com/docs/2.0/status-badges/
+
+You can add in your README file a badge indicating the status of your last pipeline.
+
+Update file `README.md` the with :
+
+```markdown
+[![<ORG_NAME>](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg)](LINK)
+```
+
+### Run cypress on CI
+
+We must configure the usage if the dedicated Orb in Circle CI: https://github.com/cypress-io/circleci-orb
+
+Steps:
+
+- Go to Circle CI project pipelines
+- Click `Organization Settings`
+- Click `Security`
+- Allow Uncertified Orbs: `Yes`
+
+Update file `.circleci/config.yml` with:
+
+```yml
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.26.0
+  node: circleci/node@3.0.0
+workflows:
+  build:
+    jobs:
+      - node/test
+      - cypress/run:
+          start: 'npm start'
+          wait-on: 'http://localhost:3000'
+```
+
+Maybe you have to downgrade the version of `react-scripts` to 3.4.0 (and `babel-loader` to 8.0.6) (see https://github.com/facebook/create-react-app/issues/8688).
+
+```json
+"dependencies": {
+  "react-scripts": "3.4.0"
+},
+"devDependencies": {
+  "babel-loader": "8.0.6"
+},
+```
+
+Snapshots must be commited along your code so check the `.gitignore` file ad remove `__image_snapshots__` if it is present.
+
+Also remove `aws-exports.js` from `.gitignore` file to be able to launch development server on CI.
+
+Then push your code.
