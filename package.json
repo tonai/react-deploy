@@ -10,7 +10,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-router-dom": "5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.11.6",
@@ -48,9 +48,9 @@
     "wait-on": "5.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env CI=1 react-scripts start",
     "build": "react-scripts build",
-    "test": "cross-env CI=1 npm run jest:test && npm run cypress:test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
@@ -62,8 +62,7 @@
     "stylelint": "stylelint \"./**/*.{css,scss,sass}\" --fix",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "jest:test": "react-scripts test --env=jsdom"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
