@@ -1,5 +1,6 @@
 {
   "baseUrl": "http://localhost:3000",
   "experimentalFetchPolyfill": true,
-  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"]
+  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+  "projectId": "49dchw"
 }
