@@ -6,4 +6,5 @@ workflows:
     jobs:
       - cypress/run:
           record: true
-          start: 'npm start' # start server before running tests
+          start: 'npm start'
+          wait-on: 'http://localhost:3000'
