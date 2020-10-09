@@ -1,5 +1,7 @@
 # Building
 
+[![tonai](https://circleci.com/gh/tonai/react-deploy.svg?style=svg)](https://circleci.com/gh/tonai/react-deploy)
+
 ## Generate bundle
 
 Run command:
@@ -278,38 +280,12 @@ Steps:
 - Click `Créer un élément`
   - Create element `{ "id": 1, "title": "News" }`
   - Create element `{ "id": 2, "title": "Blog post" }`
-- Select table `articles-dev`
-- In the right pane click `Éléments`
-- Click `Créer un élément`
-  - Create element `{ "id": 1, "title": "Article 1", "category": 1, "published": true, "content": "Lorem ipsum" }`
-  - Create element `{ "id": 2, "title": "Article 2", "category": 2, "published": true, "content": "Lorem ipsum" }`
-  - Create element `{ "id": 3, "title": "Article 3", "category": 1, "published": false, "content": "Lorem ipsum" }`
 
 ### Update lambda functions
 
-In file `amplify/backend/function/apiarticles/src/app.js`:
+Update file `amplify/backend/function/apiarticles/src/app.js` with the content this [file](./amplify/backend/function/apiarticles/src/app.js).
 
-- line 93 change `res.json(data.Items);` into `res.json(data.Items[0]);`
-- add method:
-
-```js
-app.get(path, function (req, res) {
-  let queryParams = {
-    TableName: tableName
-  };
-
-  dynamodb.scan(queryParams, (err, data) => {
-    if (err) {
-      res.statusCode = 500;
-      res.json({ error: 'Could not load items: ' + err });
-    } else {
-      res.json(data.Items);
-    }
-  });
-});
-```
-
-Same for file `amplify/backend/function/apicategories/src/app.js`.
+Update file `amplify/backend/function/apicategories/src/app.js` with the content this [file](./amplify/backend/function/apicategories/src/app.js).
 
 Deploy again with:
 
@@ -370,6 +346,27 @@ export default function api(url, options = {}) {
 }
 ```
 
+Update `addArticle` and `updateArticle` methods in file `src/services/articleService/articleService.js` with:
+
+```js
+addArticle(article) {
+  return api('/articles', {
+    article = { ...article, id: Date.now() }; // DynamoDB does not have auto increments
+    body: article, // JSON.stringify is not needed anymore
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST'
+  }).then(() => article); // Return created article
+}
+
+updateArticle(article) {
+  return api(`/articles/${article.id}`, {
+    body: article, // JSON.stringify is not needed anymore
+    headers: { 'Content-Type': 'application/json' },
+    method: 'PUT'
+  });
+}
+```
+
 Update all `.env*` files with:
 
 ```
@@ -411,3 +408,49 @@ amplify publish
 ```
 
 And check again.
+
+# Continuous Integration
+
+## Circle CI
+
+### Configuration
+
+Steps
+
+- Connect to https://app.circleci.com/ with your Github account
+- Choose repo and click `Set Up Project`
+- Click `Add Config`
+  - if it does not work, choose `Manual Setup`
+  - Create file `.circleci/config.yml` with:
+  ```yml
+  version: 2.1
+  orbs:
+    node: circleci/node@3.0.0
+  workflows:
+    node-tests:
+      jobs:
+        - node/test
+  ```
+  - Commit and push to Gihub
+  - Back to Circle CI Click `Start Building`
+- Click `Proceed to New UX`
+
+Snapshots must be commited along your code so check the `.gitignore` file ad remove `__snapshots__` if it is present.
+
+Anytime you push to Github, Circle CI will run all your tests.  
+You will receive an email if tests failed.  
+You cans see the status of your tests in Circle CI Pipelines page : https://app.circleci.com/pipelines/github/tonai/react-deploy
+
+![Circle CI pipelines](./README/circleci.png)
+
+### Badge
+
+https://circleci.com/docs/2.0/status-badges/
+
+You can add in your README file a badge indicating the status of your last pipeline.
+
+Update file `README.md` the with :
+
+```markdown
+[![<ORG_NAME>](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg)](LINK)
+```

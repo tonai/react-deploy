@@ -2,11 +2,12 @@ import api from '../apiService/apiService';
 
 export default {
   addArticle(article) {
+    article = { ...article, id: Date.now() };
     return api('/articles', {
-      body: JSON.stringify(article),
+      body: article,
       headers: { 'Content-Type': 'application/json' },
       method: 'POST'
-    });
+    }).then(() => article);
   },
 
   getArticle(id) {
@@ -25,7 +26,7 @@ export default {
 
   updateArticle(article) {
     return api(`/articles/${article.id}`, {
-      body: JSON.stringify(article),
+      body: article,
       headers: { 'Content-Type': 'application/json' },
       method: 'PUT'
     });

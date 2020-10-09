@@ -27,16 +27,10 @@ if (process.env.ENV && process.env.ENV !== 'NONE') {
   tableName = tableName + '-' + process.env.ENV;
 }
 
-const userIdPresent = false; // TODO: update in case is required to use that definition
 const partitionKeyName = 'id';
 const partitionKeyType = 'N';
-const sortKeyName = '';
-const sortKeyType = '';
-const hasSortKey = sortKeyName !== '';
 const path = '/articles';
-const UNAUTH = 'UNAUTH';
 const hashKeyPath = '/:' + partitionKeyName;
-const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
 // declare a new express app
 var app = express();
 app.use(bodyParser.json());
@@ -69,19 +63,13 @@ app.get(path + hashKeyPath, function (req, res) {
     ComparisonOperator: 'EQ'
   };
 
-  if (userIdPresent && req.apiGateway) {
+  try {
     condition[partitionKeyName]['AttributeValueList'] = [
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH
+      convertUrlType(req.params[partitionKeyName], partitionKeyType)
     ];
-  } else {
-    try {
-      condition[partitionKeyName]['AttributeValueList'] = [
-        convertUrlType(req.params[partitionKeyName], partitionKeyType)
-      ];
-    } catch (err) {
-      res.statusCode = 500;
-      res.json({ error: 'Wrong column type ' + err });
-    }
+  } catch (err) {
+    res.statusCode = 500;
+    res.json({ error: 'Wrong column type ' + err });
   }
 
   let queryParams = {
@@ -99,60 +87,11 @@ app.get(path + hashKeyPath, function (req, res) {
   });
 });
 
-/*****************************************
- * HTTP Get method for get single object *
- *****************************************/
-
-app.get(path + '/object' + hashKeyPath + sortKeyPath, function (req, res) {
-  var params = {};
-  if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  } else {
-    params[partitionKeyName] = req.params[partitionKeyName];
-    try {
-      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
-    } catch (err) {
-      res.statusCode = 500;
-      res.json({ error: 'Wrong column type ' + err });
-    }
-  }
-  if (hasSortKey) {
-    try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
-    } catch (err) {
-      res.statusCode = 500;
-      res.json({ error: 'Wrong column type ' + err });
-    }
-  }
-
-  let getItemParams = {
-    TableName: tableName,
-    Key: params
-  };
-
-  dynamodb.get(getItemParams, (err, data) => {
-    if (err) {
-      res.statusCode = 500;
-      res.json({ error: 'Could not load items: ' + err.message });
-    } else {
-      if (data.Item) {
-        res.json(data.Item);
-      } else {
-        res.json(data);
-      }
-    }
-  });
-});
-
 /************************************
- * HTTP put method for insert object *
+ * HTTP put method for update object *
  *************************************/
 
-app.put(path, function (req, res) {
-  if (userIdPresent) {
-    req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  }
-
+app.put(path + hashKeyPath, function (req, res) {
   let putItemParams = {
     TableName: tableName,
     Item: req.body
@@ -172,10 +111,6 @@ app.put(path, function (req, res) {
  *************************************/
 
 app.post(path, function (req, res) {
-  if (userIdPresent) {
-    req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  }
-
   let putItemParams = {
     TableName: tableName,
     Item: req.body
@@ -194,26 +129,15 @@ app.post(path, function (req, res) {
  * HTTP remove method to delete object *
  ***************************************/
 
-app.delete(path + '/object' + hashKeyPath + sortKeyPath, function (req, res) {
+app.delete(path + hashKeyPath, function (req, res) {
   var params = {};
-  if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  } else {
-    params[partitionKeyName] = req.params[partitionKeyName];
-    try {
-      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
-    } catch (err) {
-      res.statusCode = 500;
-      res.json({ error: 'Wrong column type ' + err });
-    }
-  }
-  if (hasSortKey) {
-    try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
-    } catch (err) {
-      res.statusCode = 500;
-      res.json({ error: 'Wrong column type ' + err });
-    }
+
+  params[partitionKeyName] = req.params[partitionKeyName];
+  try {
+    params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
+  } catch (err) {
+    res.statusCode = 500;
+    res.json({ error: 'Wrong column type ' + err });
   }
 
   let removeItemParams = {
