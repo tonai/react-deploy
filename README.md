@@ -554,7 +554,7 @@ describe('UI', () => {
     cy.visit('/');
     cy.document().toMatchImageSnapshot({
       imageConfig: {
-        threshold: 1,
+        threshold: 0.001,
         thresholdType: 'percent'
       }
     });
@@ -589,7 +589,7 @@ Test locally with `npm run test`.
 
 Then push and check Circle CI.
 
-# Continuous Integration
+# Continuous Integration / Delivery
 
 ## Circle CI
 
@@ -678,3 +678,18 @@ Snapshots must be commited along your code so check the `.gitignore` file ad rem
 Also remove `aws-exports.js` from `.gitignore` file to be able to launch development server on CI.
 
 Then push your code.
+
+## AWS Amplify
+
+TODO
+
+https://docs.amplify.aws/start/getting-started/hosting/q/integration/react#add-hosting-to-your-app
+https://docs.cypress.io/guides/guides/continuous-integration.html#CircleCI
+
+# Release
+
+## Conventional changelog
+
+TODO
+
+https://github.com/conventional-changelog/standard-version
