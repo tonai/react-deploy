@@ -3,7 +3,9 @@ const { initPlugin } = require('cypress-plugin-snapshots/plugin');
 module.exports = (on, config) => {
   initPlugin(on, config);
 
-  const { viewportWidth: w, viewportHeight: h } = config;
+  // const { viewportWidth: w, viewportHeight: h } = config;
+  const w = 1000;
+  const h = 660;
   on('before:browser:launch', (browser = {}, launchOptions) => {
     switch (browser.name) {
       //browser.family === 'chromium' && browser.name !== 'electron')
