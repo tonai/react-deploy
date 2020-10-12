@@ -144,7 +144,11 @@ Steps :
 
 - Select region: `eu-west-1`
 - User name: `amplify-react-deploy`
-- Create user on web interface (next/next/next)
+- Create user on web interface:
+  - Click `Suivant: Autorisations`
+  - Click `Suivant: Balises`
+  - Click `Suivant: Vérification`
+  - Click `Créer un rôle`
 - Enter access key
 - Enter secret key
 - Profile name: `react-deploy`
@@ -585,6 +589,10 @@ describe('UI', () => {
 
 For better UI stability remove the automatic input focus in file `src/components/Filters/Filters.jsx`.
 
+Also screenshots must be done on exactly the same environment as the CI to match each other (CircleCI run on Debian 10 as of october the 12 th 2020).
+
+If it is too complicated, you can just comment all tests on file `ui.js`.
+
 Test locally with `npm run test`.
 
 Then push and check Circle CI.
@@ -636,6 +644,8 @@ Update file `README.md` the with :
 ```
 
 ### Run cypress on CI
+
+https://docs.cypress.io/guides/guides/continuous-integration.html#CircleCI
 
 We must configure the usage if the dedicated Orb in Circle CI: https://github.com/cypress-io/circleci-orb
 
@@ -711,10 +721,45 @@ Steps:
 
 ## AWS Amplify
 
-TODO
-
 https://docs.amplify.aws/start/getting-started/hosting/q/integration/react#add-hosting-to-your-app
-https://docs.cypress.io/guides/guides/continuous-integration.html#CircleCI
+https://docs.cypress.io/guides/guides/continuous-integration.html#AWS-Amplify
+
+To avoid ui tests to fail because of the test envionment comment all tests on file `ui.js`.
+
+Run command:
+
+```bash
+amplify add hosting
+```
+
+Steps:
+
+- Plugin: `Hosting with Amplify Console`
+- Type: `Continuous deployment`
+- Connect app using the web interface:
+  - Connect a frontend web app: `Github`
+  - Click `Connect branch`
+  - Click `Authorize aws-amplify-console`
+  - Confirm Github password
+  - Référentiel: `tonai/react-deploy`
+  - Branche: `main`
+  - Click `Suivant`
+  - Select a backend environment: `dev`
+  - Click `Create new role`:
+    - Click `Suivant: Autorisations`
+    - Click `Suivant: Balises`
+    - Click `Suivant: Vérification`
+    - Click `Créer un rôle`
+  - Back to previous screen click `Refresh existing roles`
+  - Select role in dropdown
+  - Click `Suivant`
+  - Click `Enregistrer et déployer`
+
+Get the URL (exemple: https://main.d10pt2uwkkj5zj.amplifyapp.com) and update the `homepage` part in file `package.json`.
+
+## AWS prod env
+
+TODO
 
 # Release
 

@@ -10,6 +10,14 @@
       "StackName": "amplify-reactdeploy-dev-142949",
       "StackId": "arn:aws:cloudformation:eu-west-1:764144525436:stack/amplify-reactdeploy-dev-142949/770f6d30-0706-11eb-851d-068f754658c0",
       "AmplifyAppId": "d10pt2uwkkj5zj"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d10pt2uwkkj5zj",
+          "type": "cicd"
+        }
+      }
     }
   }
 }

@@ -102,5 +102,5 @@
     ]
   },
   "proxy": "http://localhost:3001",
-  "homepage": "http://react-deploy-dev.s3-website-eu-west-1.amazonaws.com/"
+  "homepage": "https://main.d10pt2uwkkj5zj.amplifyapp.com"
 }
