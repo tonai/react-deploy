@@ -23,7 +23,12 @@ describe('UI', () => {
     cy.route(getArticlesRoute, 'fixture:getArticles.json').as('getArticles');
 
     cy.visit('/article');
-    cy.document().toMatchImageSnapshot();
+    cy.document().toMatchImageSnapshot({
+      imageConfig: {
+        threshold: 0.001,
+        thresholdType: 'percent'
+      }
+    });
   });
 
   it('Edit page', () => {
@@ -35,6 +40,11 @@ describe('UI', () => {
     cy.route(getArticleRoute + id, 'fixture:getArticle.json').as('getArticle');
 
     cy.visit('/article/1');
-    cy.document().toMatchImageSnapshot();
+    cy.document().toMatchImageSnapshot({
+      imageConfig: {
+        threshold: 0.001,
+        thresholdType: 'percent'
+      }
+    });
   });
 });
