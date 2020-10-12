@@ -1,6 +1,6 @@
-const getCategoriesRoute = '/dev/categories';
-const getArticlesRoute = '/dev/articles';
-const getArticleRoute = '/dev/articles/';
+const getCategoriesRoute = '**/dev/categories';
+const getArticlesRoute = '**/dev/articles';
+const getArticleRoute = '**/dev/articles/';
 
 describe('UI', () => {
   it('Homepage', () => {
@@ -32,14 +32,14 @@ describe('UI', () => {
   });
 
   it('Edit page', () => {
-    const id = 1;
+    const id = 3;
 
     cy.server();
     cy.route(getCategoriesRoute, 'fixture:getCategories.json').as('getCategories');
     cy.route(getArticlesRoute, 'fixture:getArticles.json').as('getArticles');
     cy.route(getArticleRoute + id, 'fixture:getArticle.json').as('getArticle');
 
-    cy.visit('/article/1');
+    cy.visit('/article/' + id);
     cy.document().toMatchImageSnapshot({
       imageConfig: {
         threshold: 0.001,

@@ -1,9 +1,9 @@
-const getCategoriesRoute = '/dev/categories';
-const getArticlesRoute = '/dev/articles';
-const addArticleRoute = '/dev/articles';
-const getArticleRoute = '/dev/articles/';
-const editArticleRoute = '/dev/articles/';
-const deleteArticleRoute = '/dev/articles/';
+const getCategoriesRoute = '**/dev/categories';
+const getArticlesRoute = '**/dev/articles';
+const addArticleRoute = '**/dev/articles';
+const getArticleRoute = '**/dev/articles/';
+const editArticleRoute = '**/dev/articles/';
+const deleteArticleRoute = '**/dev/articles/';
 
 describe('E2E', () => {
   it('Visits the app', () => {
