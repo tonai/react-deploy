@@ -597,6 +597,30 @@ Test locally with `npm run test`.
 
 Then push and check Circle CI.
 
+### Initializing Amplify from project source
+
+After cloning a fresh project that uses AWS Amplify run the following command:
+
+```bash
+amplify init
+```
+
+Steps:
+
+- Existing environment: `Yes`
+- Choose environment: `dev`
+- Editor: `Visual Studio Code`
+- New user: `No`
+- Enter access key
+- Enter secret key
+- Region: `eu-west-1`
+
+Run following command to check if everything is ok:
+
+```bash
+amplify status
+```
+
 # Continuous Integration / Delivery
 
 ## Circle CI

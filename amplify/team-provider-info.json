@@ -17,6 +17,10 @@
           "appId": "d10pt2uwkkj5zj",
           "type": "cicd"
         }
+      },
+      "function": {
+        "apiarticles": {},
+        "apicategories": {}
       }
     }
   }
