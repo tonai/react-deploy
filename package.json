@@ -104,5 +104,5 @@
     ]
   },
   "proxy": "http://localhost:3001",
-  "homepage": "https://main.d10pt2uwkkj5zj.amplifyapp.com"
+  "homepage": "https://prod.d10pt2uwkkj5zj.amplifyapp.com"
 }
