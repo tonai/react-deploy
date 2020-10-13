@@ -805,5 +805,6 @@ Update file `package.json` with:
 And create a new release with the command:
 
 ```bash
-npm run release
+npm run release -- --first-release
+git push --follow-tags origin main
 ```
