@@ -79,7 +79,7 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-reactdeploy-dev-142949-deployment",
+          "S3Bucket": "amplify-reactdeploy-prod-144914-deployment",
           "S3Key": "amplify-builds/apicategories-4b6363304b7a59485068-build.zip"
         }
       }

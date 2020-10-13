@@ -23,5 +23,30 @@
         "apicategories": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-reactdeploy-prod-144914-authRole",
+      "UnauthRoleArn": "arn:aws:iam::764144525436:role/amplify-reactdeploy-prod-144914-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::764144525436:role/amplify-reactdeploy-prod-144914-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-reactdeploy-prod-144914-deployment",
+      "UnauthRoleName": "amplify-reactdeploy-prod-144914-unauthRole",
+      "StackName": "amplify-reactdeploy-prod-144914",
+      "StackId": "arn:aws:cloudformation:eu-west-1:764144525436:stack/amplify-reactdeploy-prod-144914/8016cf70-0d52-11eb-a05c-02207ac29fea",
+      "AmplifyAppId": "d10pt2uwkkj5zj"
+    },
+    "categories": {
+      "function": {
+        "apiarticles": {},
+        "apicategories": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d10pt2uwkkj5zj",
+          "type": "cicd"
+        }
+      }
+    }
   }
 }
