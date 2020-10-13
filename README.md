@@ -788,6 +788,22 @@ TODO
 
 ## Conventional changelog
 
-TODO
-
 https://github.com/conventional-changelog/standard-version
+
+```bash
+npm i --save-dev standard-version
+```
+
+Update file `package.json` with:
+
+```json
+"scripts": {
+  "release": "standard-version"
+}
+```
+
+And create a new release with the command:
+
+```bash
+npm run release
+```

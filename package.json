@@ -41,6 +41,7 @@
     "react-app-polyfill": "1.0.6",
     "react-is": "16.13.1",
     "source-map-explorer": "2.5.0",
+    "standard-version": "9.0.0",
     "stylelint": "13.7.2",
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-standard": "20.0.0",
@@ -62,7 +63,8 @@
     "stylelint": "stylelint \"./**/*.{css,scss,sass}\" --fix",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "release": "standard-version"
   },
   "eslintConfig": {
     "extends": [
