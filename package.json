@@ -90,16 +90,16 @@
     }
   },
   "lint-staged": {
-    "./**/*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx}": [
       "eslint --max-warnings=0 --fix --no-ignore",
       "prettier --write",
-      "cross-env CI=test react-scripts test --bail --findRelatedTests"
+      "cross-env CI=true react-scripts test --bail --findRelatedTests"
     ],
-    "./**/*.{css,scss,sass}": [
+    "*.{css,scss,sass}": [
       "stylelint --fix",
       "prettier --write"
     ],
-    "./**/*.{json,md,html}": [
+    "!(*CHANGELOG).{json,md,html}": [
       "prettier --write"
     ]
   },
