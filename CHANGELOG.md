@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/tonai/react-deploy/compare/v0.1.0...v0.1.1) (2020-10-13)
+
+
+### Bug Fixes
+
+* do not run prettier on CHANGELOG.md file (when running the npm run release command) ([5739e1a](https://github.com/tonai/react-deploy/commit/5739e1a6b8c6cad76a14abe90263afd4c64af618))
+* run command with --first-release arg when releasing fot he first time ([e5bc611](https://github.com/tonai/react-deploy/commit/e5bc61142cc9823bc757518c98267e836267809d))
+
 ## 0.1.0 (2020-10-13)
 
 ### Features
