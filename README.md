@@ -754,8 +754,31 @@ Steps:
   - Select role in dropdown
   - Click `Suivant`
   - Click `Enregistrer et déployer`
+- On the project page click `Paramètre de génération` on the left panel:
+  - Update the file `amplify.yml` with:
+  ```yml
+  frontend:
+    phases:
+      preBuild:
+        commands:
+          - npm ci
+      build:
+        commands:
+          - npm run build
+    artifacts:
+      baseDirectory: build
+      files:
+        - '**/*'
+    cache:
+      paths:
+        - node_modules/**/*
+  ```
 
 Get the URL (exemple: https://main.d10pt2uwkkj5zj.amplifyapp.com) and update the `homepage` part in file `package.json`.
+
+Also upgrade the version of `react-scripts` to 3.4.3 (and `babel-loader` to 8.1.0) (see https://github.com/aws-amplify/amplify-js/issues/2667).
+
+Then push your code.
 
 ## AWS prod env
 

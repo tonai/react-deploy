@@ -8,4 +8,9 @@ import App from './components/App/App';
 
 import './assets/css/main.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
