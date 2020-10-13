@@ -1,6 +1,6 @@
-// const getCategoriesRoute = '**/dev/categories';
-// const getArticlesRoute = '**/dev/articles';
-// const getArticleRoute = '**/dev/articles/';
+// const getCategoriesRoute = '**/prod/categories';
+// const getArticlesRoute = '**/prod/articles';
+// const getArticleRoute = '**/prod/articles/';
 
 // describe('UI', () => {
 //   it('Homepage', () => {
