@@ -804,9 +804,55 @@ Also upgrade the version of `react-scripts` to 3.4.3 (and `babel-loader` to 8.1.
 
 Then push your code.
 
-## AWS prod env
+## AWS production environment
 
-TODO
+https://docs.amplify.aws/cli/teams/overview
+
+Run commands:
+
+```bash
+git checkout -b prod
+amplify init
+```
+
+Steps:
+
+- Existing environment: `No`
+- Name: `prod`
+- Use existing profile: `Yes`
+- Profile: `react-deploy`
+
+Then push your code and create the backend environment with:
+
+```bash
+amplify push
+git push --set-upstream origin prod
+```
+
+Steps:
+
+- Connect to AWS console
+- Search for `Amplify`
+- Select the app `reactdeploy`
+- Click `Connecter unr branche`
+  - Branche: `prod`
+  - Click `Suivant`
+  - Click `Enregistrer et déployer`
+
+Get the URL (exemple: https://prod.d10pt2uwkkj5zj.amplifyapp.com) and update the `homepage` part in file `package.json`.
+
+Update file `cypress/integration/e2e.js` with:
+
+```js
+const getCategoriesRoute = '**/prod/categories';
+const getArticlesRoute = '**/prod/articles';
+const addArticleRoute = '**/prod/articles';
+const getArticleRoute = '**/prod/articles/';
+const editArticleRoute = '**/prod/articles/';
+const deleteArticleRoute = '**/prod/articles/';
+```
+
+And push again your code.
 
 # Release
 
