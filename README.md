@@ -899,3 +899,5 @@ And create a new release with the command:
 npm run release -- --first-release
 git push --follow-tags origin main
 ````
+
+Next time you want to create a relase just run `npm run release` or most probably `npm run release -- --release-as [VERSION]` (https://github.com/conventional-changelog/standard-version#release-as-a-target-type-imperatively-npm-version-like) because of issue https://github.com/conventional-changelog/standard-version/issues/521.
