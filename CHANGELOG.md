@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/tonai/react-deploy/compare/v0.1.1...v0.2.0) (2020-10-13)
+
+
+### Features
+
+* add environment management ([d12d3a6](https://github.com/tonai/react-deploy/commit/d12d3a6b9e0d4072c49caf12e630d410d90ca058))
+* initialize amplify project from newly cloned project ([20af19a](https://github.com/tonai/react-deploy/commit/20af19aad29096001ef2cd7b3a4c1598874e4851))
+
+
+### Bug Fixes
+
+* remove CHANGELOG.md file from husky/lint-staged ([bcd3168](https://github.com/tonai/react-deploy/commit/bcd31682826299884fcd5f8226a795fd4b470b73))
+
 ### [0.1.1](https://github.com/tonai/react-deploy/compare/v0.1.0...v0.1.1) (2020-10-13)
 
 
