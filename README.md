@@ -802,9 +802,30 @@ Update file `package.json` with:
 }
 ```
 
+And remove the `CHANGELOG.md` file from being updated with `husky` when creating a release:
+
+````json
+"scripts": {
+  "release": "standard-version"
+},
+"lint-staged": {
+  "*.{js,jsx,ts,tsx}": [
+    "eslint --max-warnings=0 --fix --no-ignore",
+    "prettier --write",
+    "cross-env CI=true react-scripts test --bail --findRelatedTests"
+  ],
+  "*.{css,scss,sass}": [
+    "stylelint --fix",
+    "prettier --write"
+  ],
+  "!(*CHANGELOG).{json,md,html}": [
+    "prettier --write"
+  ]
+}
+
 And create a new release with the command:
 
 ```bash
 npm run release -- --first-release
 git push --follow-tags origin main
-```
+````
