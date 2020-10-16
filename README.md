@@ -892,6 +892,7 @@ And remove the `CHANGELOG.md` file from being updated with `husky` when creating
     "prettier --write"
   ]
 }
+```
 
 And create a new release with the command:
 
