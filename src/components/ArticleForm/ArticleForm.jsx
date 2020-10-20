@@ -23,7 +23,7 @@ export function ArticleForm(props) {
         </div>
         <div className="ArticleForm__row">
           <div className="ArticleForm__cell">
-            <label htmlFor="title">Category :</label>
+            <label htmlFor="category">Category :</label>
           </div>
           <div className="ArticleForm__cell">
             <select id="category" name="category" onChange={handleChange} value={article.category}>
@@ -38,7 +38,7 @@ export function ArticleForm(props) {
         </div>
         <div className="ArticleForm__row">
           <div className="ArticleForm__cell">
-            <label htmlFor="title">Content :</label>
+            <label htmlFor="content">Content :</label>
           </div>
           <div className="ArticleForm__cell">
             <textarea id="content" name="content" onChange={handleChange} value={article.content} />
@@ -46,7 +46,7 @@ export function ArticleForm(props) {
         </div>
         <div className="ArticleForm__row">
           <div className="ArticleForm__cell">
-            <label htmlFor="title">Published :</label>
+            <label htmlFor="published">Published :</label>
           </div>
           <div className="ArticleForm__cell">
             <input
@@ -60,7 +60,7 @@ export function ArticleForm(props) {
         </div>
       </div>
       <div className="ArticleForm__buttons">
-        <input className="ArticleForm__button" type="submit" />
+        <input className="ArticleForm__button" type="submit" value="Submit" />
       </div>
     </form>
   );
